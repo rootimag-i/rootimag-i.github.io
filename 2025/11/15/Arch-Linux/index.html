@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Arch Linux安装教程 - Rootimag&#039;s Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Rootimag&#039;s Blogs"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rootimag&#039;s Blogs"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="archlinux 基础安装 ⛵ 万事俱备，只欠东风经过了上一节的准备工作，我们可以开始正式安装 archlinux 了。如果你还没有完成前面的阅读，请先仔细阅读章节 安装前的准备。如果对本节的步骤不理解或者有疑问，请阅读下一节 基础安装详解  本节从安装最基础的、无图形化界面的 archlinux 系统开始。如有需要可以参阅 ArchWiki 官方安装指南。 ::: tip ℹ️ 提示 本节中的"><meta property="og:type" content="blog"><meta property="og:title" content="Arch Linux安装教程"><meta property="og:url" content="http://example.com/2025/11/15/Arch-Linux/"><meta property="og:site_name" content="Rootimag&#039;s Blogs"><meta property="og:description" content="archlinux 基础安装 ⛵ 万事俱备，只欠东风经过了上一节的准备工作，我们可以开始正式安装 archlinux 了。如果你还没有完成前面的阅读，请先仔细阅读章节 安装前的准备。如果对本节的步骤不理解或者有疑问，请阅读下一节 基础安装详解  本节从安装最基础的、无图形化界面的 archlinux 系统开始。如有需要可以参阅 ArchWiki 官方安装指南。 ::: tip ℹ️ 提示 本节中的"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/pre-virt_vb-14.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/pre-virt_vb-15.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_reflector.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_check-efi.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_ping.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_time.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mirrorlist-1.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mirrorlist-2.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-1.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-2.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-3.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-4.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-5.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-6.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-7.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-8.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-9.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-10.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-11.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-12.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-13.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-14.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkswap.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-1.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-2.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-3.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-4.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-5.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mount-1.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mount-2.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mount-3.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mount-4.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_pacstrap-1.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_pacstrap-2.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_fstab.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_chroot.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-1.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-2.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-3.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-4.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_locale-1.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_locale-2.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_locale-3.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_passwd.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_grub-1.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_grub-2.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_grub-3.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install/os-prober-1.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_finish.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_last-step-1.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_last-step-2.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_last-step-3.png"><meta property="og:image" content="http://example.com/2025/11/15/Arch-Linux/guide/basic-install_fastfetch.png"><meta property="article:published_time" content="2025-11-15T03:54:45.000Z"><meta property="article:modified_time" content="2025-11-15T04:11:01.317Z"><meta property="article:author" content="Rootimag(maziming)"><meta property="article:tag" content="Arch Linux"><meta property="article:tag" content="系统安装"><meta property="article:tag" content="分区"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://example.com/2025/11/15/Arch-Linux/guide/pre-virt_vb-14.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/11/15/Arch-Linux/"},"headline":"Arch Linux安装教程","image":["http://example.com/2025/11/15/Arch-Linux/guide/pre-virt_vb-14.png","http://example.com/2025/11/15/Arch-Linux/guide/pre-virt_vb-15.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_reflector.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_check-efi.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_ping.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_time.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mirrorlist-1.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mirrorlist-2.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-1.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-2.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-3.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-4.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-5.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-6.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-7.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-8.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-9.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-10.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-11.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-12.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-13.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_partition-14.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkswap.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-1.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-2.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-3.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-4.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-5.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mount-1.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mount-2.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mount-3.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_mount-4.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_pacstrap-1.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_pacstrap-2.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_fstab.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_chroot.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-1.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-2.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-3.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-4.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_locale-1.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_locale-2.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_locale-3.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_passwd.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_grub-1.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_grub-2.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_grub-3.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install/os-prober-1.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_finish.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_last-step-1.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_last-step-2.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_last-step-3.png","http://example.com/2025/11/15/Arch-Linux/guide/basic-install_fastfetch.png"],"datePublished":"2025-11-15T03:54:45.000Z","dateModified":"2025-11-15T04:11:01.317Z","author":{"@type":"Person","name":"Rootimag(maziming)"},"publisher":{"@type":"Organization","name":"Rootimag's Blogs","logo":{"@type":"ImageObject","url":"http://example.com/img/logo.svg"}},"description":"archlinux 基础安装 ⛵ 万事俱备，只欠东风经过了上一节的准备工作，我们可以开始正式安装 archlinux 了。如果你还没有完成前面的阅读，请先仔细阅读章节 安装前的准备。如果对本节的步骤不理解或者有疑问，请阅读下一节 基础安装详解  本节从安装最基础的、无图形化界面的 archlinux 系统开始。如有需要可以参阅 ArchWiki 官方安装指南。 ::: tip ℹ️ 提示 本节中的"}</script><link rel="canonical" href="http://example.com/2025/11/15/Arch-Linux/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Rootimag&#039;s Blogs" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-11-15T03:54:45.000Z" title="2025/11/15 11:54:45">2025-11-15</time>发表</span><span class="level-item"><time dateTime="2025-11-15T04:11:01.317Z" title="2025/11/15 12:11:01">2025-11-15</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a><span> / </span><a class="link-muted" href="/categories/Linux/%E6%95%99%E7%A8%8B/">教程</a></span><span class="level-item">1 小时读完 (大约7244个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Arch Linux安装教程</h1><div class="content"><h1 id="archlinux-基础安装"><a href="#archlinux-基础安装" class="headerlink" title="archlinux 基础安装"></a>archlinux 基础安装</h1><blockquote>
+<h3 id="⛵-万事俱备，只欠东风"><a href="#⛵-万事俱备，只欠东风" class="headerlink" title="⛵ 万事俱备，只欠东风"></a>⛵ 万事俱备，只欠东风</h3><p>经过了上一节的准备工作，我们可以开始正式安装 archlinux 了。如果你还没有完成前面的阅读，请先仔细阅读章节 <a href="pre-install.md">安装前的准备</a>。如果对本节的步骤不理解或者有疑问，请阅读下一节 <a href="basic-install-detail.md">基础安装详解</a></p>
+</blockquote>
+<p>本节从安装最基础的、无图形化界面的 archlinux 系统开始。如有需要可以参阅 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">ArchWiki 官方安装指南</a>。</p>
+<p>::: tip ℹ️ 提示</p>
+<p>本节中的截图来自虚拟机和已经安装好的 archlinux。不用担心！和你在实体机看到的是一样的。</p>
+<p>:::</p>
+<p>::: warning ⚠️ 注意</p>
+<p>请按照指南的步骤一步一步进行！不要跳步、也不要在步骤中添加多余的动作！</p>
+<p>另外，如果安装中有报错，请弄清楚报错的原因（这要求你起码能看懂有报错）！常见的原因包括但不限于输错了命令、添加了多余的步骤等。在解决了问题之后再进行下一步！</p>
+<p>:::</p>
+<h2 id="0-进入安装环境"><a href="#0-进入安装环境" class="headerlink" title="0. 进入安装环境"></a>0. 进入安装环境</h2><p><img src="/2025/11/15/Arch-Linux/guide/pre-virt_vb-14.png" alt="archlinux-iso-1"></p>
+<ol>
+<li>在第一个选项回车</li>
+</ol>
+<p><img src="/2025/11/15/Arch-Linux/guide/pre-virt_vb-15.png" alt="archlinux-iso-2"></p>
+<ol start="2">
+<li>进入安装环境后，便可以开始通过命令安装 archlinux 了</li>
+</ol>
+<h2 id="1-禁用-reflector-服务"><a href="#1-禁用-reflector-服务" class="headerlink" title="1. 禁用 reflector 服务"></a>1. 禁用 reflector 服务</h2><p>2020 年，archlinux 安装镜像中加入了 <code>reflector</code> 服务，它会自己更新 <code>mirrorlist</code>（软件包管理器 <code>pacman</code> 的软件源）。在特定情况下，它会误删某些有用的源信息。这里进入安装环境后的第一件事就是将其禁用。也许它是一个好用的工具，但是很明显，因为地理上造成的特殊网络环境，这项服务并不适合启用。</p>
+<ol>
+<li>通过以下命令将该服务禁用：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop reflector.service</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>通过以下命令查看该服务是否被禁用，按下 <code>q</code> 退出结果输出：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status reflector.service</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_reflector.png" alt="stop-reflector"></p>
+<p>::: tip ℹ️ 提示</p>
+<ul>
+<li><p>在命令行中你可以使用如下命令清屏：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clear</span><br></pre></td></tr></table></figure>
+
+<p>同时，你可以使用 <code>Tab</code> 键在输入命令的时候对命令、参数或文件路径进行自动补全，提高效率的同时降低输入错误的风险。</p>
+</li>
+<li><p><code>Tab</code> 无法补全时，有些设备的蜂鸣器会发出“哔——”声，可以使用如下命令禁用蜂鸣器内核模块：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmmod pcspkr</span><br></pre></td></tr></table></figure></li>
+<li><p>要永久禁用蜂鸣器内核模块, 请创建并编辑 <code>/etc/modprobe.d/blacklist.conf</code></p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudoedit /etc/modprobe.d/blacklist.conf</span><br></pre></td></tr></table></figure>
+
+<p>加入以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blacklist pcspkr</span><br></pre></td></tr></table></figure>
+
+<p>这样下次启动就不会加载 pcspkr 模块了</p>
+</li>
+</ul>
+<p>:::</p>
+<h2 id="2-再次确认是否为-UEFI-模式"><a href="#2-再次确认是否为-UEFI-模式" class="headerlink" title="2. 再次确认是否为 UEFI 模式"></a>2. 再次确认是否为 UEFI 模式</h2><p>禁用 <code>reflector</code> 服务后，我们再来确认一下是否为 <code>UEFI</code> 模式：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_check-efi.png" alt="check-efi"></p>
+<p>若输出了一堆东西（<code>efi</code> 变量），则说明已在 <code>UEFI</code> 模式。否则请确认你的启动方式是否为 <code>UEFI</code>。</p>
+<h2 id="3-连接网络"><a href="#3-连接网络" class="headerlink" title="3. 连接网络"></a>3. 连接网络</h2><p>::: tip ℹ️ 提示</p>
+<p>archlinux 的安装<strong>必须</strong>要求网络环境。</p>
+<p>:::</p>
+<p>::: tip ℹ️ 提示</p>
+<p>若为虚拟机且按照上一节 <a href="pre-virt.md#_3-%E9%85%8D%E7%BD%AE-virtualbox">虚拟机安装前的准备</a> 进行了配置；同时宿主机连接了网络，那么虚拟机应该已经连接网络了。</p>
+<p>:::</p>
+<h3 id="若使用无线连接"><a href="#若使用无线连接" class="headerlink" title="若使用无线连接"></a>若使用<strong>无线连接</strong></h3><p>使用 <code>iwctl</code> 进行连接：</p>
+<figure class="highlight zsh"><figcaption><span>&#123;2,4&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iwctl <span class="comment"># 进入交互式命令行</span></span><br><span class="line">device list <span class="comment"># 列出无线网卡设备名，比如无线网卡看到叫 wlan0</span></span><br><span class="line">station wlan0 scan <span class="comment"># 扫描网络</span></span><br><span class="line">station wlan0 get-networks <span class="comment"># 列出所有 wifi 网络</span></span><br><span class="line">station wlan0 connect wifi-name <span class="comment"># 进行连接，注意这里无法输入中文。回车后输入密码即可</span></span><br><span class="line"><span class="built_in">exit</span> <span class="comment"># 连接成功后退出</span></span><br></pre></td></tr></table></figure>
+
+<p>::: tip ℹ️ 提示</p>
+<p>若无线网卡无法显示，请按照上一节 <a href="pre-install.md#_1-%E7%A1%AE%E4%BF%9D%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83">确保网络环境</a> 的说明<strong>确保你的无线网卡硬件开关处于打开状态</strong>。</p>
+<p>你可以使用如下命令查看内核是否加载了你的无线网卡驱动。</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci -k | grep Network</span><br></pre></td></tr></table></figure>
+
+<p>以我的硬件为例，输出如下：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00:14.3 Network controller: Intel Corporation Wi-Fi 6 AX201 (rev 20)</span><br></pre></td></tr></table></figure>
+
+<p>如果你的 BIOS 没有开启无线网卡的开关可以参考下列的命令来开启 <code>WIFI</code></p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rfkill list <span class="comment">#查看无线连接 是否被禁用(blocked: yes)</span></span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> wlan0 up <span class="comment">#比如无线网卡看到叫 wlan0</span></span><br></pre></td></tr></table></figure>
+
+<p>若看到类似<code>Operation not possible due to RF-kill</code>的报错，继续尝试<code>rfkill unblock wifi</code>来解锁无线网卡。</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rfkill unblock wifi</span><br></pre></td></tr></table></figure>
+
+<p>部分无线网卡不兼容，请考虑使用有线连接安装 archlinux。</p>
+<p>:::</p>
+<h3 id="若使用有线连接"><a href="#若使用有线连接" class="headerlink" title="若使用有线连接"></a>若使用<strong>有线连接</strong></h3><p>正常来说，只要插上一个已经联网的路由器分出的网线（DHCP），直接就能联网。</p>
+<p>可以等待几秒等网络建立连接后再进行下一步测试网络的操作。</p>
+<p>若笔记本没有网线接口请使用带网线接口的扩展坞。</p>
+<h2 id="4-测试网络连通性"><a href="#4-测试网络连通性" class="headerlink" title="4. 测试网络连通性"></a>4. 测试网络连通性</h2><p>通过 <code>ping</code> 命令测试网络连通性：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping www.bilibili.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_ping.png" alt="ping"></p>
+<p>稍等片刻，若能看到数据返回，即说明已经联网。与 Windows 不同的是，需要按下 <code>Ctrl</code> + <code>C</code> 手动退出 <code>ping</code> 命令。</p>
+<p>::: tip ℹ️ 提示</p>
+<p>如果无线网络还是无法连接，请使用 <code>ip link</code> 命令查看无线网卡设备，使用 <code>ip link set &lt;设备名&gt; up</code> 命令激活对应的无线网卡。若看到类似 <code>Operation not possible due to RF-kill</code> 的报错，继续尝试 <code>rfkill unblock wifi</code> 来解锁无线网卡。</p>
+<p>如有需要，可以参考 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Network_configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Wireless_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E6%A3%80%E6%9F%A5%E8%AE%BE%E5%A4%87%E7%8A%B6%E6%80%81">ArchWiki 相关内容</a>。</p>
+<p>:::</p>
+<h2 id="5-更新系统时钟"><a href="#5-更新系统时钟" class="headerlink" title="5. 更新系统时钟"></a>5. 更新系统时钟</h2><p>使用 <code>timedatectl</code> 确保系统时间是准确的。这一步<strong>不是</strong>可选的，正确的系统时间对于部分程序来说非常重要：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">timedatectl set-ntp <span class="literal">true</span> <span class="comment"># 将系统时间与网络时间进行同步</span></span><br><span class="line">timedatectl status <span class="comment"># 检查服务状态</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_time.png" alt="time"></p>
+<h2 id="6-更换国内软件仓库镜像源加快下载速度"><a href="#6-更换国内软件仓库镜像源加快下载速度" class="headerlink" title="6. 更换国内软件仓库镜像源加快下载速度"></a>6. 更换国内软件仓库镜像源加快下载速度</h2><p>使用 <code>vim</code> 编辑器修改 <code>/etc/pacman.d/mirrorlist</code> 文件。将 <code>pacman</code> 软件仓库源更换为国内软件仓库镜像源：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+
+<p>::: tip ℹ️ 提示</p>
+<p>如果不会使用 <code>vim</code> 编辑器，请参阅 <a href="../advanced/system-ctl.md#%E7%BB%88%E7%AB%AF%E7%BC%96%E8%BE%91%E5%99%A8-vim-%E7%9A%84%E4%BD%BF%E7%94%A8">这里</a>。</p>
+<p><code>vim</code> 编辑器在安装和配置系统的过程中还需要使用多次。</p>
+<p>:::</p>
+<p>放在最上面的是会使用的软件仓库镜像源，推荐的镜像源如下：</p>
+<figure class="highlight plaintext"><figcaption><span>&#123;1&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch # 中国科学技术大学开源镜像站</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch # 清华大学开源软件镜像站</span><br><span class="line">Server = https://repo.huaweicloud.com/archlinux/$repo/os/$arch # 华为开源镜像站</span><br><span class="line">Server = http://mirror.lzu.edu.cn/archlinux/$repo/os/$arch # 兰州大学开源镜像站</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mirrorlist-1.png" alt="mirrorlist-1"></p>
+<p>修改完成的 <code>/etc/pacman.d/mirrorlist</code> 文件如图所示。</p>
+<p>::: tip ℹ️ 提示</p>
+<p>如果发现 <code>/etc/pacman.d/mirrorlist</code> 是如图这个样子的，那么说明你禁用 <code>reflector</code> 服务晚了。<code>reflector</code> 已经自动帮你生成了新的软件仓库镜像源列表。不过没有关系，手动将国内软件仓库镜像源放在最前面即可。</p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mirrorlist-2.png" alt="mirrorlist-2"></p>
+<p>:::</p>
+<p>::: warning ⚠️ 注意</p>
+<p>前车之鉴 —— 请不在这一步中添加 <code>archlinuxcn</code> 源！如果你在 <code>/etc/pacman.conf</code> 中添加了内容，请将它们删掉。</p>
+<p>:::</p>
+<h2 id="7-分区和格式化（使用-Btrfs-文件系统）"><a href="#7-分区和格式化（使用-Btrfs-文件系统）" class="headerlink" title="7. 分区和格式化（使用 Btrfs 文件系统）"></a>7. 分区和格式化（使用 Btrfs 文件系统）</h2><h3 id="7-1-分区"><a href="#7-1-分区" class="headerlink" title="7-1. 分区"></a>7-1. 分区</h3><p>::: tip ℹ️ 提示</p>
+<p>虚拟机安装请同时参阅步骤 <a href="basic-install-detail.md#%F0%9F%86%95-%E5%85%A8%E6%96%B0%E5%AE%89%E8%A3%85">🆕 全新安装</a>。</p>
+<p>分区步骤对于有些人来说是个难点，如果有不理解的地方请参阅下一节 <a href="basic-install-detail.md#%F0%9F%92%BE-%E5%88%86%E5%8C%BA%E5%92%8C%E6%A0%BC%E5%BC%8F%E5%8C%96">基础安装详解</a>。</p>
+<p>同时，分区其它说明也会在下一节 <a href="basic-install-detail.md#%F0%9F%92%BE-%E5%88%86%E5%8C%BA%E5%92%8C%E6%A0%BC%E5%BC%8F%E5%8C%96">基础安装详解</a> 详细列出。</p>
+<p>:::</p>
+<p>::: danger ☢️ 警告</p>
+<p>分区操作的部分命令具有危险性！除非你知道每一个命令在干什么，否则请不要执行！</p>
+<p>同时，请提前做好数据备份，防止数据丢失！</p>
+<p>:::</p>
+<p>本指南考虑到多数情况，在这里首先介绍 win10 和 archlinux 在一个磁盘上双系统的分区配置。</p>
+<ul>
+<li><code>/</code> 根目录：<code>&gt;= 128GB</code>（和用户主目录在同一个 <code>Btrfs</code> 文件系统上）</li>
+<li><code>/home</code> 用户主目录：<code>&gt;= 128GB</code>（和根目录在同一个 <code>Btrfs</code> 文件系统上）</li>
+<li><code>/boot</code> EFI 分区：<code>256MB</code>（由电脑厂商或 Windows 决定，无需再次创建）</li>
+<li>Swap 分区：<code>&gt;= 电脑实际运行内存的 60%</code>（设置这个大小是为了配置休眠准备）</li>
+</ul>
+<p>::: tip ℹ️ 提示</p>
+<p>因为采用 <code>Btrfs</code> 文件系统，所以根目录和用户主目录实际在一个分区上，只是在不同的子卷上而已。这里根目录和用户主目录的大小仅为参考，一般来说日常使用的 linux 分配 128GB 已经够用了。</p>
+<p>:::</p>
+<ol>
+<li>通过 <code>lsblk</code> 命令，区分要安装 archlinux 的磁盘（通过观察磁盘的大小、已存在的分区情况等判断）并显示当前磁盘的分区情况：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk <span class="comment"># 显示当前分区情况</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-1.png" alt="partition-1"></p>
+<p>此处要分区和安装 archlinux 的磁盘即为 <code>sda</code>。请根据你的实际情况判断！</p>
+<p>::: tip ℹ️ 提示</p>
+<p>为了模拟真实的环境，笔者手动创建了三个分区分别代表：</p>
+<ol>
+<li><code>sda1</code> —— EFI 分区</li>
+<li><code>sda2</code> —— win10 下的 C 盘（象征性的分了 <code>1GB</code>）</li>
+<li><code>sda3</code> —— win10 下的 D 盘（象征性的分了 <code>1GB</code>）</li>
+</ol>
+<p>:::</p>
+<p>::: tip ℹ️ 提示</p>
+<p>注意此处并不会显出出未分配的磁盘空间！只有在使用 <code>cfdisk</code> 执行分区操作后才会显示出来。</p>
+<p>:::</p>
+<p>::: tip ℹ️ 提示</p>
+<p>如果你的硬盘是 NVME 协议的固态硬盘，那么将不是 <code>sdx</code> 而是 <code>nvmexn1</code>。</p>
+<p>:::</p>
+<ol start="2">
+<li>接下来使用 <code>cfdisk</code> 命令对磁盘分区（对于 SATA 协议的硬盘，<code>x</code> 为字母 <code>a</code>、<code>b</code> 或 <code>c</code> 等等；对于 NVME 协议的硬盘，<code>x</code> 为数字 <code>0</code>、<code>1</code> 或 <code>2</code> 等等，请根据实际情况判断）：</li>
+</ol>
+<p>::: code-group</p>
+<figure class="highlight zsh"><figcaption><span>[SATA]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cfdisk /dev/sdx <span class="comment"># 对安装 archlinux 的磁盘分区</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight zsh"><figcaption><span>[NVME]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cfdisk /dev/nvmexn1 <span class="comment"># 对安装 archlinux 的磁盘分区</span></span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-2.png" alt="partition-2"></p>
+<p>进入 <code>cfdisk</code> 分区工具之后，你会看到如图所示的界面。通过方向键 <code>↑</code> 和 <code>↓</code> 可以在要操作磁盘分区或空余空间中移动；通过方向键 <code>←</code> 和 <code>→</code> 在对当前高亮的磁盘分区或空余空间要执行的操作中移动。</p>
+<ol start="3">
+<li>首先创建 Swap 分区。选中 <code>Free space</code> &gt; 再选中操作 <code>[New]</code> &gt; 然后按下回车 <code>Enter</code> 以新建 <code>swap</code> 分区（类似 Windows 的交换文件）</li>
+</ol>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-3.png" alt="partition-3"></p>
+<ol start="4">
+<li>按下回车后会提示输入 <code>分区大小</code>，Swap 分区建议为<strong>电脑内存大小的 60%</strong>，或者和内存大小相等 &gt; 然后按下回车 <code>Enter</code></li>
+</ol>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-4.png" alt="partition-4"></p>
+<p>::: tip ℹ️ 提示</p>
+<p>单位可以自行输入，如 <code>GB</code>、<code>MB</code> 等等。</p>
+<p>:::</p>
+<ol start="5">
+<li>默认新建的类型是 <code>Linux filesystem</code>，我们需要将类型更改为 <code>Linux swap</code>。选中操作 <code>[Type]</code> &gt; 然后按下回车 <code>Enter</code> &gt; 通过方向键 <code>↑</code> 和 <code>↓</code> 选中 <code>Linux swap</code> &gt; 最后按下回车 <code>Enter</code></li>
+</ol>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-5.png" alt="partition-5"></p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-6.png" alt="partition-6"></p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-7.png" alt="partition-7"></p>
+<ol start="6">
+<li>我们再只需要一个分区即可（因为使用 <code>Btrfs</code> 文件系统，所以根目录和用户主目录在一个分区上），所以类似的：选中 <code>Free space</code> &gt; 再选中操作 <code>[New]</code> &gt; 然后按下回车 <code>Enter</code> 以新建分区</li>
+</ol>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-8.png" alt="partition-8"></p>
+<ol start="7">
+<li>输入 <code>分区大小</code>（默认是剩余的全部空间。请根据实际情况输入）&gt; 然后按下回车 <code>Enter</code></li>
+</ol>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-9.png" alt="partition-9"></p>
+<ol start="8">
+<li>分区类型默认即可，无需更改。接下来选中操作 <code>[Write]</code> 并回车 <code>Enter</code> &gt; 输入 <code>yes</code> 并回车 <code>Enter</code> 确认分区操作</li>
+</ol>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-10.png" alt="partition-10"></p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-11.png" alt="partition-11"></p>
+<p>::: warning ⚠️ 注意</p>
+<p>只有写入了操作分区表才会更改。</p>
+<p>:::</p>
+<ol start="9">
+<li>选中操作 <code>[Quit]</code> 并回车 <code>Enter</code> 以退出 <code>cfdisk</code> 分区工具</li>
+</ol>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-12.png" alt="partition-12"></p>
+<p>::: danger ☢️ 警告</p>
+<p>再次提醒！请仔细检查命令和操作的正确性，否则将出现不可预料的情况。最危险的是可能造成数据丢失！</p>
+<p>常见的错误包括不小心把 Windows 的分区删掉了 😥。</p>
+<p>:::</p>
+<ol start="10">
+<li>分区完成后，使用 <code>fdisk</code> 或 <code>lsblk</code> 命令复查分区情况：</li>
+</ol>
+<p>::: code-group</p>
+<figure class="highlight zsh"><figcaption><span>[fdisk]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l <span class="comment"># 复查磁盘情况</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight zsh"><figcaption><span>[lsblk]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk <span class="comment"># 复查磁盘情况</span></span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-13.png" alt="partition-13"></p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_partition-14.png" alt="partition-14"></p>
+<h3 id="7-2-格式化并创建-Btrfs-子卷"><a href="#7-2-格式化并创建-Btrfs-子卷" class="headerlink" title="7-2. 格式化并创建 Btrfs 子卷"></a>7-2. 格式化并创建 Btrfs 子卷</h3><h4 id="7-2-0-格式化-EFI-分区"><a href="#7-2-0-格式化-EFI-分区" class="headerlink" title="7-2.0. 格式化 EFI 分区"></a>7-2.0. 格式化 EFI 分区</h4><p>::: code-group</p>
+<figure class="highlight zsh"><figcaption><span>[SATA]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/sdxn</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight zsh"><figcaption><span>[NVME]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/nvmexn1pn</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p>::: warning ⚠️ 注意</p>
+<p>如果目标是双系统（Win10&#x2F;Win11 + Arch Linux），并且 Win10&#x2F;Win11 和 Arch Linux 将要共存在一个硬盘上的话，不要重新格式化原有的 EFI 分区，因为它可能包含启动其他操作系统所需的文件。</p>
+<p>:::</p>
+<h4 id="7-2-1-格式化-Swap-分区"><a href="#7-2-1-格式化-Swap-分区" class="headerlink" title="7-2-1. 格式化 Swap 分区"></a>7-2-1. 格式化 Swap 分区</h4><p>通过以下命令格式化对应的 Swap 分区，请按照实际情况替换 <code>x</code> 和 <code>n</code>（下同）：</p>
+<p>::: code-group</p>
+<figure class="highlight zsh"><figcaption><span>[SATA]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /dev/sdxn</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight zsh"><figcaption><span>[NVME]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /dev/nvmexn1pn</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mkswap.png" alt="mkswap"></p>
+<h4 id="7-2-2-格式化-Btrfs-分区"><a href="#7-2-2-格式化-Btrfs-分区" class="headerlink" title="7-2-2. 格式化 Btrfs 分区"></a>7-2-2. 格式化 Btrfs 分区</h4><ol>
+<li>首先我们需要将整一个分区格式化为 <code>Btrfs</code> 文件系统。使用如下命令进行格式化：</li>
+</ol>
+<p>::: code-group</p>
+<figure class="highlight zsh"><figcaption><span>[SATA]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.btrfs -L myArch /dev/sdxn</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight zsh"><figcaption><span>[NVME]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.btrfs -L myArch /dev/nvmexn1pn</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<blockquote>
+<p>📑 命令参数说明：</p>
+<ul>
+<li><code>-L</code> 选项后指定该分区的 <code>LABLE</code>，这里以 <code>myArch</code> 为例，也可以自定义，但不能使用特殊字符以及空格，且最好有意义</li>
+</ul>
+</blockquote>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-1.png" alt="mkbtrfs_step-1"></p>
+<ol start="2">
+<li>为了创建子卷，我们需要先将 <code>Btrfs</code> 分区挂载到 <code>/mnt</code> 下：</li>
+</ol>
+<p>::: code-group</p>
+<figure class="highlight zsh"><figcaption><span>[SATA]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t btrfs -o compress=zstd /dev/sdxn /mnt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight zsh"><figcaption><span>[NVME]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t btrfs -o compress=zstd /dev/nvmexn1pn /mnt</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<blockquote>
+<p>📑 命令参数说明：</p>
+<ul>
+<li><code>-t</code> 选项后指定挂载分区文件系统类型</li>
+<li><code>-o</code> 选项后添加挂载参数：<ul>
+<li><code>compress=zstd</code> —— 开启透明压缩</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ol start="3">
+<li>使用 <code>df</code> 命令复查挂载情况：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h <span class="comment"># -h 选项会使输出以人类可读的单位显示</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-2.png" alt="mkbtrfs_step-2"></p>
+<h4 id="7-2-3-创建-Btrfs-子卷"><a href="#7-2-3-创建-Btrfs-子卷" class="headerlink" title="7-2-3. 创建 Btrfs 子卷"></a>7-2-3. 创建 Btrfs 子卷</h4><ol>
+<li>通过以下命令创建两个 <code>Btrfs</code> 子卷，之后将分别挂载到 <code>/</code> 根目录和 <code>/home</code> 用户主目录：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">btrfs subvolume create /mnt/@ <span class="comment"># 创建 / 目录子卷</span></span><br><span class="line">btrfs subvolume create /mnt/@home <span class="comment"># 创建 /home 目录子卷</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-3.png" alt="mkbtrfs_step-3"></p>
+<p>::: warning ⚠️ 注意</p>
+<p>除非你清楚你的操作产生的后果，否则请保持子卷名称和结构与本指南一致，因为在后面我们会设置的快照工具 <code>timeshift</code> 只支持这种子卷布局。</p>
+<p>:::</p>
+<ol start="2">
+<li>通过以下命令复查子卷情况：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btrfs subvolume list -p /mnt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-4.png" alt="mkbtrfs_step-4"></p>
+<ol start="3">
+<li>子卷创建好后，我们需要将 <code>/mnt</code> 卸载掉，以挂载子卷：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount /mnt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mkbtrfs-5.png" alt="mkbtrfs_step-5"></p>
+<h2 id="8-挂载"><a href="#8-挂载" class="headerlink" title="8. 挂载"></a>8. 挂载</h2><ol>
+<li>在挂载时，挂载是有顺序的，需要从根目录开始挂载。使用如下命令挂载子卷：</li>
+</ol>
+<p>::: code-group</p>
+<figure class="highlight zsh"><figcaption><span>[SATA]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount -t btrfs -o subvol=/@,compress=zstd /dev/sdxn /mnt <span class="comment"># 挂载 / 目录</span></span><br><span class="line"><span class="built_in">mkdir</span> /mnt/home <span class="comment"># 创建 /home 目录</span></span><br><span class="line">mount -t btrfs -o subvol=/@home,compress=zstd /dev/sdxn /mnt/home <span class="comment"># 挂载 /home 目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/boot <span class="comment"># 创建 /boot 目录</span></span><br><span class="line">mount /dev/sdxn /mnt/boot <span class="comment"># 挂载 /boot 目录</span></span><br><span class="line">swapon /dev/sdxn <span class="comment"># 挂载交换分区</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight zsh"><figcaption><span>[NVME]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount -t btrfs -o subvol=/@,compress=zstd /dev/nvmexn1pn /mnt <span class="comment"># 挂载 / 目录</span></span><br><span class="line"><span class="built_in">mkdir</span> /mnt/home <span class="comment"># 创建 /home 目录</span></span><br><span class="line">mount -t btrfs -o subvol=/@home,compress=zstd /dev/nvmexn1pn /mnt/home <span class="comment"># 挂载 /home 目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/boot <span class="comment"># 创建 /boot 目录</span></span><br><span class="line">mount /dev/nvmexn1pn /mnt/boot <span class="comment"># 挂载 /boot 目录</span></span><br><span class="line">swapon /dev/nvmexn1pn <span class="comment"># 挂载交换分区</span></span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mount-1.png" alt="mount_step-1"></p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mount-2.png" alt="mount_step-2"></p>
+<ol start="2">
+<li>使用 <code>df</code> 命令复查挂载情况：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mount-3.png" alt="mount_step-3"></p>
+<ol start="3">
+<li>使用 <code>free</code> 命令复查 Swap 分区挂载情况：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h <span class="comment"># -h 选项会使输出以人类可读的单位显示</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_mount-4.png" alt="mount_step-4"></p>
+<h2 id="9-安装系统"><a href="#9-安装系统" class="headerlink" title="9. 安装系统"></a>9. 安装系统</h2><ol>
+<li>通过如下命令使用 <code>pacstrap</code> 脚本安装基础包：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base base-devel linux linux-firmware btrfs-progs</span><br><span class="line"><span class="comment"># 如果使用btrfs文件系统，额外安装一个btrfs-progs包</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📑 命令参数说明：</p>
+<ul>
+<li><code>base-devel</code> —— <code>base-devel</code> 在 <code>AUR</code> 包的安装过程中是必须用到的</li>
+<li><code>linux</code> —— 内核软件包，这里建议先不要替换为其它内核</li>
+</ul>
+</blockquote>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_pacstrap-1.png" alt="pacstrap_step-1"></p>
+<p>如果提示 GPG 证书错误，可能是因为使用的不是最新的镜像文件，可以通过更新 <code>archlinux-keyring</code> 解决此问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S archlinux-keyring</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>通过如下命令使用 <code>pacstrap</code> 脚本安装其它必要的功能性软件：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt networkmanager vim <span class="built_in">sudo</span> zsh zsh-completions</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📑 命令参数说明：</p>
+<ul>
+<li><code>zsh</code> —— <code>zsh-completions</code> 如果你是 bash 的爱好者，请把这两个包换成<code>bash-completion</code></li>
+<li>如果你是第一次接触*nix 系统的新手，不建议换成 bash</li>
+</ul>
+</blockquote>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_pacstrap-2.png" alt="pacstrap_step-2"></p>
+<p>经过一系列安装时提示信息的刷屏，这些包就安装好了。</p>
+<p>::: warning ⚠️ 注意</p>
+<p>在执行命令前，请仔细检查命令的拼写正确；同时注意不要漏装东西。</p>
+<p>很多人在后续的步骤中报错就是因为这里漏装了东西。</p>
+<p>如果报错，请<strong>检查拼写</strong>，同时请确保之前的步骤 <a href="#_6-%E6%9B%B4%E6%8D%A2%E5%9B%BD%E5%86%85%E8%BD%AF%E4%BB%B6%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F%E6%BA%90%E5%8A%A0%E5%BF%AB%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6">更换国内软件仓库镜像源加快下载速度</a> 中<strong>没有</strong>添加 <code>archlinuxcn</code> 源。</p>
+<p>:::</p>
+<h2 id="10-生成-fstab-文件"><a href="#10-生成-fstab-文件" class="headerlink" title="10. 生成 fstab 文件"></a>10. 生成 fstab 文件</h2><ol>
+<li><code>fstab</code> 用来定义磁盘分区。它是 Linux 系统中重要的文件之一。使用 <code>genfstab</code> 自动根据当前挂载情况生成并写入 <code>fstab</code> 文件：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /mnt &gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>复查一下 <code>/mnt/etc/fstab</code> 确保没有错误：</li>
+</ol>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_fstab.png" alt="fstab"></p>
+<p>若为 NVME 协议的硬盘，输出结果应该与此类似：</p>
+<figure class="highlight plaintext"><figcaption><span>&#123;2,5,8,11&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># /dev/nvme0n1p6  /  btrfs  rw,relatime,compress=zstd:3,ssd,space_cache,subvolid=256,subvol=/@,subvol=@ 0 0</span><br><span class="line">UUID=d01a3ca5-0798-462e-9a30-97065e7e36e1 /  btrfs  rw,relatime,compress=zstd:3,ssd,space_cache,subvolid=256,subvol=/@,subvol=@  0 0</span><br><span class="line"></span><br><span class="line"># /dev/nvme0n1p1  /boot vfat  rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro      0 2</span><br><span class="line">UUID=522C-80C6  /boot vfat  rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro 0 2</span><br><span class="line"></span><br><span class="line"># /dev/nvme0n1p6  /home btrfs rw,relatime,compress=zstd:3,ssd,space_cache,subvolid=257,subvol=/@home,subvol=@home 0 0</span><br><span class="line">UUID=d01a3ca5-0798-462e-9a30-97065e7e36e1 /home btrfs rw,relatime,compress=zstd:3,ssd,space_cache,subvolid=257,subvol=/@home,subvol=@home 0 0</span><br><span class="line"></span><br><span class="line"># /dev/nvme0n1p5  none  swap  defaults  0 0</span><br><span class="line">UUID=8e40dbed-590f-4cb8-80de-5cef8343a9fc none  swap  defaults  0 0</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-change-root"><a href="#11-change-root" class="headerlink" title="11. change root"></a>11. change root</h2><p>使用以下命令把系统环境切换到新系统下：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_chroot.png" alt="arch-chroot"></p>
+<p>此时，原来安装盘下的 <code>/mnt</code> 目录就变成了新系统的 <code>/</code> 目录。同时，可以发现命令行的提示符颜色和样式也发生了改变。</p>
+<h2 id="12-设置主机名与时区"><a href="#12-设置主机名与时区" class="headerlink" title="12. 设置主机名与时区"></a>12. 设置主机名与时区</h2><ol>
+<li>首先在 <code>/etc/hostname</code> 设置主机名：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hostname</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-1.png" alt="set-name-and-timezone_step-1"></p>
+<p>加入你想为主机取的主机名，这里比如叫 myarch。</p>
+<p>::: tip ℹ️ 提示</p>
+<p>主机名不要包含特殊字符以及空格。</p>
+<p>:::</p>
+<ol start="2">
+<li>接下来在 <code>/etc/hosts</code> 设置与其匹配的条目：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>加入如下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost</span><br><span class="line">::1         localhost</span><br><span class="line">127.0.1.1   myarch.localdomain myarch</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-2.png" alt="set-name-and-timezone_step-2"></p>
+<p>::: tip ℹ️ 提示</p>
+<p>你可以使用 <code>Tab</code> 对齐。</p>
+<p>:::</p>
+<p>::: tip ℹ️ 提示</p>
+<p>某些情况下如不设置主机名，在 KDE 下可能会存在网络情况变更时无法启动 GUI 应用的问题，在终端中出现形如 <code>No protocol specified qt.qpa.xcb: could not connect to display</code> 的错误。这种情况极为少见。</p>
+<p>但不管如何，即使没有问题，我们都应该设置好主机名。</p>
+<p>:::</p>
+<ol start="3">
+<li>随后设置时区，在 <code>/etc/localtime</code> 下用 <code>/usr</code> 中合适的时区创建符号链接：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-3.png" alt="set-name-and-timezone_step-3"></p>
+<blockquote>
+<h4 id="🍧-碎碎念"><a href="#🍧-碎碎念" class="headerlink" title="🍧 碎碎念"></a>🍧 碎碎念</h4><p>不要找北京啦！这里没有北京，只有上海啦！🚀</p>
+</blockquote>
+<p>::: tip ℹ️ 提示</p>
+<p>同时，你也可以使用其它时区：</p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_set-name-and-timezone-4.png" alt="set-name-and-timezone_step-4"></p>
+<p>:::</p>
+<h2 id="13-硬件时间设置"><a href="#13-硬件时间设置" class="headerlink" title="13. 硬件时间设置"></a>13. 硬件时间设置</h2><p>使用如下命令将系统时间同步到硬件时间：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
+
+<h2 id="14-设置-Locale"><a href="#14-设置-Locale" class="headerlink" title="14. 设置 Locale"></a>14. 设置 Locale</h2><p><code>Locale</code> 决定了软件使用的语言、书写习惯和字符集。</p>
+<ol>
+<li>编辑 <code>/etc/locale.gen</code>，去掉 <code>en_US.UTF-8 UTF-8</code> 以及 <code>zh_CN.UTF-8 UTF-8</code> 行前的注释符号（<code>#</code>）：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_locale-1.png" alt="locale_step-1"></p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_locale-2.png" alt="locale_step-2"></p>
+<p>::: tip ℹ️ 提示</p>
+<p>有几个选项极具迷惑性，请不要取消注释错了。</p>
+<p>:::</p>
+<ol start="2">
+<li>然后使用如下命令生成 <code>locale</code>：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_locale-3.png" alt="locale_step-3"></p>
+<ol start="3">
+<li>向 <code>/etc/locale.conf</code> 输入内容：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;LANG=en_US.UTF-8&#x27;</span>  &gt; /etc/locale.conf</span><br></pre></td></tr></table></figure>
+
+<p>::: warning ⚠️ 注意</p>
+<p>不推荐在此设置任何中文 <code>locale</code>，会导致 <code>tty</code> 乱码。</p>
+<p>:::</p>
+<h2 id="15-为-root-用户设置密码"><a href="#15-为-root-用户设置密码" class="headerlink" title="15. 为 root 用户设置密码"></a>15. 为 root 用户设置密码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_passwd.png" alt="password"></p>
+<p>::: tip ℹ️ 提示</p>
+<p>根据提示操作即可。注意输入密码时不会显示哦，不要以为 ⌨ 键盘坏了。</p>
+<p>:::</p>
+<h2 id="16-安装微码"><a href="#16-安装微码" class="headerlink" title="16. 安装微码"></a>16. 安装微码</h2><p>通过以下命令安装对应芯片制造商的微码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S intel-ucode <span class="comment"># Intel</span></span><br><span class="line">pacman -S amd-ucode <span class="comment"># AMD</span></span><br></pre></td></tr></table></figure>
+
+<p>::: tip ℹ️ 提示</p>
+<p>🎉 恭喜你！这是你在新系统中第一次使用 <code>pacman</code> 软件包管理器安装软件！在这里一路回车完成安装即可。</p>
+<p>如果你不会使用，请参阅 <a href="">这里</a>。</p>
+<p>:::</p>
+<h2 id="17-安装引导程序"><a href="#17-安装引导程序" class="headerlink" title="17. 安装引导程序"></a>17. 安装引导程序</h2><p>如有需要可以参阅 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/GRUB_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">ArchWiki 相关内容</a>。</p>
+<ol>
+<li>安装相应的包：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr os-prober</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📑 命令参数说明：</p>
+<ul>
+<li><code>-S</code> 选项后指定要通过 <code>pacman</code> 包管理器安装的包：<ul>
+<li><code>grub</code> —— 启动引导器</li>
+<li><code>efibootmgr</code> —— <code>efibootmgr</code> 被 <code>grub</code> 脚本用来将启动项写入 NVRAM</li>
+<li><code>os-prober</code> —— 为了能够引导 win10，需要安装 <code>os-prober</code> 以检测到它</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li>安装 GRUB 到 EFI 分区：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ARCH</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📑 命令参数说明：</p>
+<ul>
+<li><code>--efi-directory=/boot</code> —— 将 <code>grubx64.efi</code> 安装到之前的指定位置（EFI 分区）</li>
+<li><code>--bootloader-id=ARCH</code> —— 取名为 <code>ARCH</code></li>
+</ul>
+</blockquote>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_grub-1.png" alt="grub_step-1"></p>
+<ol start="3">
+<li>接下来使用 <code>vim</code> 编辑 <code>/etc/default/grub</code> 文件：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/default/grub</span><br></pre></td></tr></table></figure>
+
+<p>进行如下修改：</p>
+<ul>
+<li>去掉 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 一行中最后的 <code>quiet</code> 参数</li>
+<li>把 <code>loglevel</code> 的数值从 <code>3</code> 改成 <code>5</code>。这样是为了后续如果出现系统错误，方便排错</li>
+<li>加入 <code>nowatchdog</code> 参数，这可以显著提高开关机速度</li>
+</ul>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_grub-2.png" alt="grub_step-2"></p>
+<ul>
+<li>为了引导 win10，则还需要添加新的一行 <code>GRUB_DISABLE_OS_PROBER=false</code></li>
+</ul>
+<figure class="highlight plaintext"><figcaption><span>&#123;8&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># GRUB boot loader configuration</span><br><span class="line"></span><br><span class="line">GRUB_DEFAULT=0</span><br><span class="line">GRUB_TIMEOUT=5</span><br><span class="line">GRUB_DISTRIBUTOR=&quot;Arch&quot;</span><br><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=5 nowatchdog&quot;</span><br><span class="line">GRUB_CMDLINE_LINUX=&quot;&quot;</span><br><span class="line">GRUB_DISABLE_OS_PROBER=false</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>::: tip ℹ️ 提示</p>
+<p><code>nowatchdog</code> 参数无法禁用英特尔的看门狗硬件，改为 <code>modprobe.blacklist=iTCO_wdt</code> 即可。如有需要可以参考 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96#%E7%9C%8B%E9%97%A8%E7%8B%97">ArchWiki 对应内容</a></p>
+<p>:::</p>
+<ol start="4">
+<li>最后生成 <code>GRUB</code> 所需的配置文件：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_grub-3.png" alt="grub_step-3"></p>
+<p>若引导了 win10，则输出应该包含倒数第二行：</p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install/os-prober-1.png" alt="os-prober-1"></p>
+<p>若 win10 安装在另一个硬盘中则不会输出<br>可在进入系统后挂载硬盘并重新执行该命令</p>
+<p>::: tip ℹ️ 提示</p>
+<p>1.在某些主板安装完成后，你会发现没有启动条目。这是因为某些主板的 UEFI 固件在显示 UEFI NVRAM 引导条目之前，需要在特定的位置存放可引导文件，不支持自定义存放 <code>efi</code> 文件（如微星 Z170-A Gaming PRO）。解决方案是在默认启动路径下安装 <code>GRUB</code>。重新插入安装优盘，按原先顺序挂载目录（不需要再次创建文件夹了），<code>chroot</code> 到 <code>/mnt</code>，然后你可以重新用 <code>--removable</code> 安装grub2，如下命令所示。只有安装完成后你的主板不出现启动条目才需要尝试如下命令，正常安装无需执行。如有需要可以参考 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/GRUB#%E7%BC%BA%E7%9C%81/%E5%90%8E%E5%A4%87%E5%90%AF%E5%8A%A8%E8%B7%AF%E5%BE%84">ArchWiki 对应内容</a>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ARCH --removable</span><br></pre></td></tr></table></figure>
+
+<p>2.<code>os-prober</code> 在 chroot 环境中可能无法正常运作。如果遇到这种情况，重启并引导进入系统后再次尝试生成配置文件。<br>:::</p>
+<h2 id="18-完成安装"><a href="#18-完成安装" class="headerlink" title="18. 完成安装"></a>18. 完成安装</h2><ol>
+<li>输入以下命令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span> <span class="comment"># 退回安装环境</span></span><br><span class="line">umount -R /mnt <span class="comment"># 卸载新分区</span></span><br><span class="line">reboot <span class="comment"># 重启</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_finish.png" alt="finish-install"></p>
+<p>注意，<strong>重启前要先拔掉优盘</strong>，否则你重启后还是进安装程序而不是安装好的系统。</p>
+<p>::: tip ℹ️ 提示</p>
+<p>虚拟机直接重启即可。</p>
+<p>:::</p>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_last-step-1.png" alt="last-step-1"></p>
+<p>如图即为 GRUB 引导界面。</p>
+<p>::: tip ℹ️ 提示</p>
+<p>若引导了 win10 也会显示出来。</p>
+<p>:::</p>
+<p>::: tip ℹ️ 提示</p>
+<p>若 win10 分区使用了 🔐 Bitlocker 加密，则第一次从 GRUB 进入需要输入解锁密钥。</p>
+<p>你应该在步骤 <a href="pre-install.md#_5-%E8%8E%B7%E5%8F%96-bitlocker-%E6%81%A2%E5%A4%8D%E5%AF%86%E9%92%A5">5. 获取 Bitlocker 恢复密钥</a> 中已经知晓了 Bitlocker 解锁密钥。</p>
+<p>若无法从 <a target="_blank" rel="noopener" href="https://aka.ms/myrecoverykey">aka.ms 相关页面</a> 获取解锁密钥，请尝试在 BIOS 中将 Windows Boot Manager 移动到启动顺序首位再尝试进入 win10。</p>
+<p>:::</p>
+<ol start="2">
+<li>重启后使用 root 账户登录系统：</li>
+</ol>
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_last-step-2.png" alt="last-step-2"></p>
+<ol start="3">
+<li>设置开机自启并立即启动 networkmanager 服务，即可连接网络：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> --now NetworkManager <span class="comment"># 设置开机自启并立即启动 NetworkManager 服务</span></span><br><span class="line">ping www.bilibili.com <span class="comment"># 测试网络连接</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_last-step-3.png" alt="last-step-3"></p>
+<ol start="4">
+<li>若为无线连接，则需要在启动 <code>networkmanager</code> 后使用 <code>nmcli</code> 连接网络：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmcli dev wifi list <span class="comment"># 显示附近的 Wi-Fi 网络</span></span><br><span class="line">nmcli dev wifi connect <span class="string">&quot;Wi-Fi名（SSID）&quot;</span> password <span class="string">&quot;网络密码&quot;</span> <span class="comment"># 连接指定的无线网络</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以使用 <code>nmtui</code> 来配置网络</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmtui</span><br></pre></td></tr></table></figure>
+
+<p>::: tip ℹ️ 提示</p>
+<p>neofetch 原作者 dylanaraps 已于 2024 年 04 月 26 日归档 neofetch 仓库，在下面我们会使用 <code>fastfetch</code> 代替 <code>neofetch</code>。</p>
+<p>:::</p>
+<ol start="5">
+<li><code>fastfetch</code> 可以将系统信息和发行版 logo 一并打印出来。通过 <code>pacman</code> 安装 <code>fastfetch</code>：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S fastfetch</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>fastfetch</code> 打印系统信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastfetch</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/15/Arch-Linux/guide/basic-install_fastfetch.png" alt="fastfetch"></p>
+<blockquote>
+<h4 id="🍧-碎碎念-1"><a href="#🍧-碎碎念-1" class="headerlink" title="🍧 碎碎念"></a>🍧 碎碎念</h4><p>又到了 <code>fastfetch</code> 的时间了吗？</p>
+</blockquote>
+<h2 id="🎉-祝贺！🎉"><a href="#🎉-祝贺！🎉" class="headerlink" title="🎉 祝贺！🎉"></a>🎉 祝贺！🎉</h2><p>到此为止，一个基础的、无图形界面的 archlinux 已经安装完成了！这时你应该可以感到满满的满足感（即使你还没有见到图形化的界面）。好好享受一下成功安装 archlinux 的喜悦吧！</p>
+<p>如果你对本节的部分步骤不理解，请仔细阅读下一节 <a href="basic-install-detail.md">基础安装详解</a>。在此之后，我们来安装图形界面。</p>
+<p>::: tip ℹ️ 提示</p>
+<p>你可以使用以下命令关机：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">poweroff</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p>::: tip ℹ️ 提示</p>
+<p>archlinux 在 2021 年 4 月在安装镜像中内置了一个 <a target="_blank" rel="noopener" href="https://archlinux.org/packages/extra/any/archinstall/">安装脚本</a>，类似一个一键安装脚本，提供一些选项，即可快速安装（填问卷安系统）。和所有一键安装脚本类似，提供自动化，但不灵活的安装过程。缺陷包括但不限于：</p>
+<ol>
+<li>只提供有限的文件系统格式</li>
+<li>只可限定在一个磁盘</li>
+<li>不能指定软件仓库镜像源</li>
+<li>只提供有限的桌面选择</li>
+<li>自动分区不可手动干预</li>
+<li>输入错误直接崩溃退出</li>
+<li>仅支持 UEFI 等</li>
+</ol>
+<p>不建议使用这个安装脚本，除了以上各种原因，初学者也无法在这种安装过程中学到任何东西。如果你因为某些原因需要快速启动一个基础的 archlinux 环境，那么可以尝试此脚本。</p>
+<p>:::</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Arch Linux安装教程</p><p><a href="http://example.com/2025/11/15/Arch-Linux/">http://example.com/2025/11/15/Arch-Linux/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Rootimag(maziming)</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2025-11-15</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2025-11-15</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Arch-Linux/">Arch Linux</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/">系统安装</a><a class="link-muted mr-2" rel="tag" href="/tags/%E5%88%86%E5%8C%BA/">分区</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2025/11/15/hello-world/"><span class="level-item">Hello World</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card" id="comments"><div class="card-content"><h3 class="title is-5">评论</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Your name"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Your name</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Your location</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives/"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories/"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags/"><p class="title">3</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="me noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Linux/%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">教程</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-11-15T03:54:45.000Z">2025-11-15</time></p><p class="title"><a href="/2025/11/15/Arch-Linux/">Arch Linux安装教程</a></p><p class="categories"><a href="/categories/Linux/">Linux</a> / <a href="/categories/Linux/%E6%95%99%E7%A8%8B/">教程</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-11-15T03:34:11.836Z">2025-11-15</time></p><p class="title"><a href="/2025/11/15/hello-world/">Hello World</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2025/11/"><span class="level-start"><span class="level-item">十一月 2025</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arch-Linux/"><span class="tag">Arch Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E5%8C%BA/"><span class="tag">分区</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"><span class="tag">系统安装</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Rootimag&#039;s Blogs" height="28"></a><p class="is-size-7"><span>&copy; 2025 Rootimag(maziming)</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
