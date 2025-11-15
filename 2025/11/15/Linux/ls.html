@@ -1,0 +1,156 @@
+<hr>
+<h2 id="title-Linux-ls-命令date-2025-11-15-14-29-43hidden-true"><a href="#title-Linux-ls-命令date-2025-11-15-14-29-43hidden-true" class="headerlink" title="title: Linux ls 命令date: 2025-11-15 14:29:43hidden: true"></a>title: Linux ls 命令<br>date: 2025-11-15 14:29:43<br>hidden: true</h2><h2 id="Linux-ls-命令"><a href="#Linux-ls-命令" class="headerlink" title="Linux ls 命令"></a>Linux ls 命令</h2><p>Linux ls（英文全拼： list directory contents）命令用于显示指定工作目录下之内容（列出目前工作目录所含的文件及子目录)。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code class="language-bash">ls [-alrtAFR] [name...]
+</code></pre>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-a</code> <code>-all</code></td>
+<td>显示所有文件，包括隐藏文件。</td>
+</tr>
+<tr>
+<td><code>-l</code> <code>--long</code></td>
+<td>以详细格式显示文件和目录的详细信息。</td>
+</tr>
+<tr>
+<td><code>-A</code> <code>--almost-all</code></td>
+<td>显示除 <code>.</code> 和 <code>..</code> 之外的所有文件。</td>
+</tr>
+<tr>
+<td><code>-h</code> <code>--human-readable</code></td>
+<td>以人类可读方式显示文件大小。</td>
+</tr>
+<tr>
+<td><code>-t</code> <code>--time</code></td>
+<td>按修改时间排序。</td>
+</tr>
+<tr>
+<td><code>-r</code> <code>--reverse</code></td>
+<td>反向排序。</td>
+</tr>
+<tr>
+<td><code>-S</code> <code>--size</code></td>
+<td>以文件大小排序。</td>
+</tr>
+<tr>
+<td><code>-F</code> <code>--classify</code></td>
+<td>在每个文件名后显示类型指示符。</td>
+</tr>
+<tr>
+<td><code>-R</code> <code>--recursive</code></td>
+<td>递归列出所有目录下的内容。</td>
+</tr>
+<tr>
+<td><code>--color</code></td>
+<td>控制是否使用颜色显示输出。</td>
+</tr>
+<tr>
+<td><code>--group-directories-first</code></td>
+<td>按字母顺序排列目录，然后按文件名排序。</td>
+</tr>
+<tr>
+<td><code>-d</code> <code>--directory</code></td>
+<td>仅显示目录，不包括其他文件。</td>
+</tr>
+<tr>
+<td><code>-i</code> <code>--inode</code></td>
+<td>显示inode信息。</td>
+</tr>
+<tr>
+<td><code>-n</code> <code>--numeric-uid-gid</code></td>
+<td>以数字形式显示 UID 和 GID（替代用户名和组名）。</td>
+</tr>
+<tr>
+<td><code>-o</code> <code>--octal</code></td>
+<td>以八进制显示文件权限。</td>
+</tr>
+<tr>
+<td><code>-m</code></td>
+<td>以逗号分隔的列表形式显示文件。</td>
+</tr>
+<tr>
+<td><code>-1</code></td>
+<td>每行只显示一个文件。</td>
+</tr>
+<tr>
+<td><code>-Q</code> <code>--quote-name</code></td>
+<td>在文件名中使用单引号。</td>
+</tr>
+<tr>
+<td><code>-Z</code> <code>--context</code></td>
+<td>显示文件安全上下文。</td>
+</tr>
+<tr>
+<td><code>-v</code> <code>--version</code></td>
+<td>显示版本信息。</td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>显示帮助信息。</td>
+</tr>
+</tbody></table>
+<h3 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-</code></td>
+<td>普通文件</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>目录</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>符号链接</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>块设备文件</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>字符设备文件</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>管道文件</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>套接字文件</td>
+</tr>
+</tbody></table>
+<h3 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>r</code></td>
+<td>读权限</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>写权限</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>执行权限</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>无权限</td>
+</tr>
+</tbody></table>
